@@ -1,0 +1,18 @@
+/* Phones: main navigation becomes a bottom tab bar (all tabs visible, no sideways scrolling). Loaded last. */
+@media (max-width:639px){
+  /* backdrop-filter would make the fixed bar position relative to the header, so use a solid header on phones */
+  .app-header{backdrop-filter:none;background:#fff}
+  .app-header nav{position:fixed;left:0;right:0;bottom:0;z-index:60;overflow:visible;justify-content:center;
+    padding:6px 6px calc(6px + env(safe-area-inset-bottom));background:#fffffff7;border-top:1px solid var(--border);
+    box-shadow:0 -6px 20px rgba(15,23,41,.06)}
+  .main-nav-group{min-width:0;max-width:none;gap:2px}
+  .nav-pill{gap:2px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+  .nav-tab,.ubot-nav-tab{flex:1 1 0;min-width:0;flex-direction:column;gap:3px;padding:6px 0;min-height:50px;border:1px solid transparent;
+    border-radius:14px;font-size:10px;line-height:12px;font-weight:600;white-space:nowrap;box-shadow:none;background:transparent;color:inherit}
+  .ubot-nav-tab{flex:0 0 52px;color:#717487}
+  .ubot-nav-tab>img,.nav-tab svg{width:20px;height:20px}
+  .nav-tab.active{transform:none}
+  .page-shell{padding-bottom:calc(76px + env(safe-area-inset-bottom))!important}
+  .ubot-shell{padding-bottom:0!important}
+  .ubot-chat-page{height:calc(100dvh - 134px - env(safe-area-inset-bottom))}
+}
