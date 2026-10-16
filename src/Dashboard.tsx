@@ -106,10 +106,10 @@ export function Dashboard({ navigate, onReceive }: Props) {
       <div className="wallet-balances"><div><p>Crypto Wallet</p><p>{hide(baht(cryptoThb))}</p></div><div><p>Spending Wallet</p><p>{hide(baht(spendingLeft))}</p></div></div>
     </section>
     <section className="quick-actions" aria-label="Wallet actions">
-      <button className="ur-scan-cta" onClick={() => navigate('/dashboard/pay/qr')}><ScanLine />Scan to Pay (Thai QR)</button>
-      <button onClick={onReceive}><ArrowDownRight />Receive</button>
-      <button onClick={() => navigate('/dashboard/swap')}><span className="swap-icon" aria-hidden="true" />Swap</button>
-      <button onClick={() => navigate('/dashboard/pay')}><ArrowUpRight />Send</button>
+      <button className="ur-scan-cta" onClick={() => navigate('/dashboard/scan')}><ScanLine />Scan to Pay</button>
+      <button onClick={() => navigate('/dashboard/scan/receive')}><ArrowDownRight />Receive</button>
+      <button onClick={() => navigate('/dashboard/scan/swap')}><span className="swap-icon" aria-hidden="true" />Swap</button>
+      <button onClick={() => navigate('/dashboard/scan/send')}><ArrowUpRight />Send</button>
     </section>
     <section className="spending-section" aria-labelledby="spending-heading">
       <h2 id="spending-heading">Spending Breakdown</h2>

@@ -6,7 +6,7 @@ const address = '0x1F0a33d4B8860E43Bf4cd1B33F59E9bfc51c9Aa7';
 const networks = ['BNB Smart Chain', 'Ethereum', 'Base', 'Polygon'];
 const tokens = ['USDC', 'USDT', 'BNB'];
 
-export function ReceiveModal({ onClose }: { onClose: () => void }) {
+export function ReceiveModal({ onClose, embedded = false }: { onClose: () => void; embedded?: boolean }) {
   const ref = useRef<HTMLDialogElement>(null);
   const [method, setMethod] = useState<'crypto' | 'utag'>('crypto');
   const [network, setNetwork] = useState(networks[0]);
@@ -17,12 +17,13 @@ export function ReceiveModal({ onClose }: { onClose: () => void }) {
   const isCrypto = method === 'crypto';
   const qrPath = isCrypto ? '/assets/qr-crypto.svg' : '/assets/qr-utag.svg';
   useEffect(() => {
+    if (embedded) return;
     const dialog = ref.current;
     const oldOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     dialog?.showModal();
     return () => { dialog?.close(); document.body.style.overflow = oldOverflow; };
-  }, []);
+  }, [embedded]);
   async function copy() {
     try { await navigator.clipboard.writeText(isCrypto ? address : '@tanntnny'); setCopied(true); setStatus('Copied'); }
     catch { setStatus('Copy is unavailable. Select and copy the text below.'); }
@@ -37,8 +38,8 @@ export function ReceiveModal({ onClose }: { onClose: () => void }) {
       else { await navigator.clipboard.writeText(text); setStatus('Share details copied'); }
     } catch (error) { if (!(error instanceof DOMException && error.name === 'AbortError')) setStatus('Sharing is unavailable. Use Copy to share your details.'); }
   }
-  return <dialog ref={ref} className="receive-dialog" aria-labelledby="receive-title" onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
-    <div className="receive-heading"><h3 id="receive-title">{isCrypto ? 'Crypto Deposit' : 'My U-Tag'}</h3><WorkspaceIconButton label="Close" onClick={onClose}><X /></WorkspaceIconButton></div>
+  const content = <>
+    <div className="receive-heading"><h3 id="receive-title">{isCrypto ? 'Crypto Deposit' : 'My U-Tag'}</h3>{!embedded && <WorkspaceIconButton label="Close" onClick={onClose}><X /></WorkspaceIconButton>}</div>
     <div className="receive-content">
       <div className="receive-tabs" role="tablist" aria-label="Receive method">
         <button role="tab" aria-selected={isCrypto} className={isCrypto ? 'selected' : ''} onClick={() => { setMethod('crypto'); setCopied(false); setSelector(null); }}><QrCode />Crypto</button>
@@ -62,5 +63,6 @@ export function ReceiveModal({ onClose }: { onClose: () => void }) {
       <div className="receive-actions"><button onClick={save}><Download />Save Image</button><button className="button-primary" onClick={share}><Share2 />Share</button></div>
       <p role="status" className={status ? 'receive-status' : 'sr-only'}>{status}</p>
     </div>
-  </dialog>;
+  </>;
+  return embedded ? <section className="receive-inline" aria-labelledby="receive-title">{content}</section> : <dialog ref={ref} className="receive-dialog" aria-labelledby="receive-title" onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === event.currentTarget) onClose(); }}>{content}</dialog>;
 }

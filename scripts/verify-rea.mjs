@@ -3,6 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
+import { verifyUbotEvidence } from './verify-ubot-rea.mjs';
 
 // This is deliberately a hard build prerequisite. Missing, changed, or failed
 // analysis must never be silently replaced with a guessed reference UI.
@@ -28,6 +29,7 @@ try {
   requireFact(runtime.some(record => record.operation === 'inspect_web_page' && record.normalized_result?.target?.url === manifest.target), 'Authenticated dashboard REA inspection missing');
   requireFact(runtime.some(record => record.operation === 'capture_web_screenshot' && record.normalized_result?.target?.url === manifest.target && record.normalized_result.completeness.status === 'complete_within_window'), 'Complete dashboard REA screenshot missing');
   requireFact(runtime.some(record => record.operation === 'capture_browser_scenario' && record.parameters?.start_url?.url === manifest.target && record.normalized_result?.steps?.some(step => step.step_id === 'open-receive' && step.status === 'completed')), 'Successful REA Receive scenario missing');
+  verifyUbotEvidence(root);
   console.log(`REA prerequisite passed: ${statistics.parsed_javascript_files} shipped dashboard source parsed; ${statistics.parse_failures} parse failures; authenticated runtime and screenshot evidence verified.`);
 } catch (error) {
   console.error(`HARD FAIL — REA analysis prerequisite: ${error.message}`);

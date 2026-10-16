@@ -1,0 +1,34 @@
+{
+  "checked": "2026-10-16T06:21:03.555Z",
+  "checks": [
+    {
+      "name": "Untouched retained evidence",
+      "result": "accepted"
+    },
+    {
+      "name": "Missing archive",
+      "result": "rejected",
+      "reason": "ENOENT: no such file or directory, open '/var/folders/69/1vwvfl494kx0sqjxln4f0mtm0000gn/T/ubot-gate-check-VPAAdi/docs/rea/ubot/evidence.json.gz'"
+    },
+    {
+      "name": "Changed archive",
+      "result": "rejected",
+      "reason": "Ubot: evidence archive digest mismatch"
+    },
+    {
+      "name": "Failed analysis even with updated archive digest",
+      "result": "rejected",
+      "reason": "Ubot: bundle analysis incomplete or failed"
+    },
+    {
+      "name": "Changed reference screenshot",
+      "result": "rejected",
+      "reason": "Ubot: reference screenshot differs from captured bytes"
+    },
+    {
+      "name": "Changed captured source even with updated archive digest",
+      "result": "rejected",
+      "reason": "Ubot: captured source integrity mismatch"
+    }
+  ]
+}

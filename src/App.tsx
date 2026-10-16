@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import { Bell, CreditCard, LayoutDashboard, LogOut, Send, User, Wallet, X } from 'lucide-react';
+import { Bell, CreditCard, LayoutDashboard, LogOut, ScanLine, Send, User, Wallet, X } from 'lucide-react';
 import { Dashboard } from './Dashboard';
 import { SecondaryPages } from './SecondaryPages';
 import { ReceiveModal } from './ReceiveModal';
 import { WorkspaceIconButton } from './components/WorkspaceIconButton';
+import { UBotPage } from './ubot/UBotPage';
 
 const navItems = [
   { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+  { name: 'Scan', path: '/dashboard/scan', icon: ScanLine },
   { name: 'Wallets', path: '/dashboard/wallets', icon: Wallet },
   { name: 'Pay', path: '/dashboard/pay', icon: Send },
   { name: 'Card', path: '/dashboard/cards', icon: CreditCard },
@@ -38,7 +40,7 @@ export function App() {
   }, []);
   useEffect(() => {
     const name = route.split('/').at(-1);
-    document.title = `${name === 'dashboard' ? 'Dashboard' : name === 'sign-in' ? 'Account' : name === 'cards' ? 'Card' : (name ?? 'Dashboard').replace(/^./, letter => letter.toUpperCase())} | U-Topia`;
+    document.title = `${route === '/ubot' ? 'UBot' : route.startsWith('/dashboard/scan') || name === 'snap-to-pay' ? 'Scan · Snap-to-Pay × Ubot' : name === 'dashboard' ? 'Dashboard' : name === 'sign-in' ? 'Account' : name === 'cards' ? 'Card' : (name ?? 'Dashboard').replace(/^./, letter => letter.toUpperCase())} | U-Topia`;
   }, [path]);
   useEffect(() => {
     if (logoutOpen) logoutRef.current?.showModal();
@@ -62,15 +64,16 @@ export function App() {
           <WorkspaceIconButton label="Logout" className="logout-button" onClick={() => setLogoutOpen(true)}><LogOut /></WorkspaceIconButton>
         </div>
       </div>
-      <nav aria-label="Main navigation"><div className="nav-pill">
+      <nav aria-label="Main navigation"><div className="main-nav-group"><a className="ubot-nav-tab" href="/ubot" aria-current={route === '/ubot' ? 'page' : undefined} onClick={event => { event.preventDefault(); navigate('/ubot'); }}><img src="/assets/ubot-orb.svg" alt="" width="20" height="20" aria-hidden="true" />UBot</a><div className="nav-pill">
         {navItems.map(({ name, path: href, icon: Icon }) => {
-          const active = name === 'Dashboard' ? route === href : route.startsWith(href) || (name === 'Wallets' && route === '/dashboard/swap');
+          const legacyScan = route === '/dashboard/pay/snap-to-pay';
+          const active = name === 'Dashboard' ? route === href : name === 'Scan' ? route.startsWith(href) || legacyScan : route.startsWith(href) && !legacyScan || (name === 'Wallets' && route === '/dashboard/swap');
           return <a className={`nav-tab ${active ? 'active' : ''}`} href={href} key={name} title={name} aria-current={active ? 'page' : undefined} onClick={event => { event.preventDefault(); navigate(href); }}><Icon strokeWidth={active ? 2.35 : 2} /><span>{name}</span></a>;
         })}
-      </div></nav>
+      </div></div></nav>
     </header>
-    <main className="page-shell p-2">
-      {route === '/dashboard' ? <Dashboard navigate={navigate} onReceive={() => setReceiveOpen(true)} /> : <SecondaryPages key={path} path={path} navigate={navigate} onReceive={() => setReceiveOpen(true)} />}
+    <main className={`page-shell p-2${route === '/ubot' ? ' ubot-shell' : ''}`}>
+      {route === '/ubot' ? <UBotPage /> : route === '/dashboard' ? <Dashboard navigate={navigate} onReceive={() => setReceiveOpen(true)} /> : <SecondaryPages key={path} path={path} navigate={navigate} onReceive={() => setReceiveOpen(true)} />}
     </main>
     {receiveOpen && <ReceiveModal onClose={() => setReceiveOpen(false)} />}
     <dialog ref={logoutRef} className="confirmation-dialog" aria-labelledby="logout-title" onCancel={() => setLogoutOpen(false)} onClick={event => { if (event.target === event.currentTarget) setLogoutOpen(false); }}>

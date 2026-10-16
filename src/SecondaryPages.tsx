@@ -3,6 +3,8 @@ import { ArrowDownRight, ArrowLeft, ArrowLeftRight, ArrowUpRight, AtSign, Bell, 
 import { WorkspaceIconButton } from './components/WorkspaceIconButton'
 import { baht, useUReady } from './uready/client'
 import { PayQR } from './uready/PayQR'
+import { SnapToPay } from './snap-to-pay/SnapToPay'
+import { ReceiveModal } from './ReceiveModal'
 import { Holdings, SpendingPanel } from './uready/WalletExtras'
 import { RecentPayments } from './Dashboard'
 
@@ -62,7 +64,7 @@ function Wallets({ navigate, onReceive }: Pick<Props, 'navigate' | 'onReceive'>)
 
 const networks = ['BNB Smart Chain', 'Ethereum', 'Polygon', 'Arbitrum', 'Base']
 const tokens = ['BNB', 'USDT', 'USDC', 'ETH']
-function Swap({ navigate }: { navigate: Navigate }) {
+function Swap({ navigate, embedded = false }: { navigate: Navigate; embedded?: boolean }) {
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
   const [amount, setAmount] = useState('')
@@ -74,7 +76,7 @@ function Swap({ navigate }: { navigate: Navigate }) {
   const tokenPicker = (side: 'from' | 'to', value: string) => <button className="token-selector" onClick={() => { setPicker(side); setSearch('') }}><span className={value ? '' : 'muted'}>{value || 'Select Token'}</span><ChevronDown size={16} /></button>
   const networkPicker = (network: string, change: (value: string) => void) => <label className="network-selector"><span className="network-coin">◈</span><select aria-label="Network" value={network} onChange={event => change(event.target.value)}>{networks.map(item => <option key={item}>{item}</option>)}</select><ChevronDown size={14} /></label>
   return <div className="secondary-page swap-page">
-    <PageHeader title="Swap" small subtitle={<><Info size={14} />Platform fee: <span className="orange">2.50%</span></>} back="/dashboard/wallets" navigate={navigate} />
+    <PageHeader title="Swap" small subtitle={<><Info size={14} />Platform fee: <span className="orange">2.50%</span></>} back={embedded ? undefined : '/dashboard/wallets'} navigate={navigate} />
     <h2>I want to <span className="orange">Swap Tokens</span></h2>
     <section className="swap-panel"><div className="swap-token-row">{tokenPicker('from', from)}<input aria-label="Amount to swap" inputMode="decimal" placeholder="0.00" value={amount} onChange={event => setAmount(event.target.value.replace(/[^0-9.]/g, ''))} /></div><div className="swap-balance"><span>Balance: 0</span><button onClick={() => setAmount('0')}>Max</button></div>{networkPicker(fromNetwork, setFromNetwork)}<hr /><div className="swap-token-row">{tokenPicker('to', to)}<strong>0</strong></div><div className="output-network">{networkPicker(toNetwork, setToNetwork)}</div></section>
     <button className="button-primary secondary-primary" disabled={!from || !to || !amount || Number(amount) <= 0} onClick={() => setMessage('Your wallet has insufficient balance for this swap.')}>{!from || !to ? 'Select tokens' : !amount || Number(amount) <= 0 ? 'Enter amount' : 'Review swap'}</button>
@@ -83,8 +85,50 @@ function Swap({ navigate }: { navigate: Navigate }) {
   </div>
 }
 
-function Pay({ navigate }: { navigate: Navigate }) {
-  return <div className="secondary-page pay-page"><PageHeader title="Pay" subtitle="Choose how you want to send" navigate={navigate} /><div className="pay-options">{[{ title: 'Scan Thai QR', subtitle: 'Pay any PromptPay QR from your crypto', icon: ScanLine, route: 'qr' }, { title: 'Send to U-tag', subtitle: 'Send to any U-tag user', icon: AtSign, route: 'u-tag' }, { title: 'Send crypto', subtitle: 'Send crypto on chain', icon: Send, route: 'crypto' }].map(({ title, subtitle, icon: Icon, route }) => <button key={route} onClick={() => navigate(`/dashboard/pay/${route}`)}><span className="pay-option-icon"><Icon size={20} /></span><span><strong>{title}</strong><small>{subtitle}</small></span><ChevronRight size={20} className="muted" /></button>)}</div></div>
+function Pay({ navigate, sendOnly = false }: { navigate: Navigate; sendOnly?: boolean }) {
+  const options = [
+    ...(!sendOnly ? [{ title: 'Scan Thai QR', subtitle: 'Pay any PromptPay QR from your crypto', icon: ScanLine, route: 'qr' }] : []),
+    { title: 'Send to U-tag', subtitle: 'Send to any U-tag user', icon: AtSign, route: 'u-tag' },
+    { title: 'Send crypto', subtitle: 'Send crypto on chain', icon: Send, route: 'crypto' },
+  ]
+  return <div className="secondary-page pay-page"><PageHeader title={sendOnly ? 'Send' : 'Pay'} subtitle="Choose how you want to send" navigate={navigate} /><div className="pay-options">{options.map(({ title, subtitle, icon: Icon, route }) => <button key={route} onClick={() => navigate(`/dashboard/pay/${route}`)}><span className="pay-option-icon"><Icon size={20} /></span><span><strong>{title}</strong><small>{subtitle}</small></span><ChevronRight size={20} className="muted" /></button>)}</div></div>
+}
+
+const scanTabs = [
+  { id: 'scan', label: 'Scan', icon: ScanLine, path: '/dashboard/scan' },
+  { id: 'receive', label: 'Receive', icon: ArrowDownRight, path: '/dashboard/scan/receive' },
+  { id: 'swap', label: 'Swap', icon: ArrowLeftRight, path: '/dashboard/scan/swap' },
+  { id: 'send', label: 'Send', icon: Send, path: '/dashboard/scan/send' },
+]
+
+function ScanPage({ path, navigate }: Pick<Props, 'path' | 'navigate'>) {
+  const section = path.split('?')[0].split('/')[3] || 'scan'
+  const active = scanTabs.find(tab => tab.id === section) ?? scanTabs[0]
+  const sendNavigate = (url: string) => navigate(url.replace(/^\/dashboard\/pay(?=\/|$)/, '/dashboard/scan/send'))
+  function selectTab(index: number) {
+    navigate(scanTabs[index].path)
+    window.requestAnimationFrame(() => document.getElementById(`scan-tab-${scanTabs[index].id}`)?.focus())
+  }
+  function tabKey(event: React.KeyboardEvent<HTMLButtonElement>, index: number) {
+    let next = index
+    if (event.key === 'ArrowRight') next = (index + 1) % scanTabs.length
+    else if (event.key === 'ArrowLeft') next = (index - 1 + scanTabs.length) % scanTabs.length
+    else if (event.key === 'Home') next = 0
+    else if (event.key === 'End') next = scanTabs.length - 1
+    else return
+    event.preventDefault()
+    selectTab(next)
+  }
+  return <div className="scan-page">
+    <header className="scan-page-heading"><div><p>EVERYDAY MONEY</p><h1>Scan</h1></div><span>Scan, receive, swap and send in one place.</span></header>
+    <div className="scan-page-tabs" role="tablist" aria-label="Scan wallet actions">{scanTabs.map((tab, index) => <button key={tab.id} id={`scan-tab-${tab.id}`} type="button" role="tab" aria-selected={active.id === tab.id} aria-controls="scan-tab-panel" tabIndex={active.id === tab.id ? 0 : -1} onClick={() => selectTab(index)} onKeyDown={event => tabKey(event, index)}><tab.icon size={17} /><span>{tab.label}</span></button>)}</div>
+    <div id="scan-tab-panel" className="scan-tab-panel" role="tabpanel" aria-labelledby={`scan-tab-${active.id}`}>
+      {active.id === 'scan' && <SnapToPay navigate={navigate} embedded />}
+      {active.id === 'receive' && <ReceiveModal embedded onClose={() => navigate('/dashboard/scan')} />}
+      {active.id === 'swap' && <Swap navigate={navigate} embedded />}
+      {active.id === 'send' && (section === 'send' && path.split('?')[0].endsWith('/u-tag') ? <SendUTag navigate={sendNavigate} /> : section === 'send' && path.split('?')[0].endsWith('/crypto') ? <SendCrypto navigate={sendNavigate} /> : <Pay navigate={sendNavigate} sendOnly />)}
+    </div>
+  </div>
 }
 
 function SendUTag({ navigate }: { navigate: Navigate }) {
@@ -148,11 +192,13 @@ function Profile({ navigate }: { navigate: Navigate }) {
 
 export function SecondaryPages({ path, navigate, onReceive }: Props) {
   const route = path.split('?')[0].replace(/\/$/, '')
+  if (route === '/dashboard/scan' || route.startsWith('/dashboard/scan/')) return <ScanPage path={path} navigate={navigate} />
   if (route === '/dashboard/wallets') return <Wallets navigate={navigate} onReceive={onReceive} />
   if (route === '/dashboard/swap') return <Swap navigate={navigate} />
   if (route === '/dashboard/pay/u-tag') return <SendUTag navigate={navigate} />
   if (route === '/dashboard/pay/crypto') return <SendCrypto navigate={navigate} />
   if (route === '/dashboard/pay/qr') return <PayQR navigate={navigate} />
+  if (route === '/dashboard/pay/snap-to-pay') return <ScanPage path="/dashboard/scan" navigate={navigate} />
   if (route === '/dashboard/pay') return <Pay navigate={navigate} />
   if (route === '/dashboard/card' || route === '/dashboard/cards') return <Cards />
   if (route === '/dashboard/profile') return <Profile navigate={navigate} />

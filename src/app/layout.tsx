@@ -3,6 +3,9 @@ import "../styles.css";
 import "../secondary.css";
 import "../receive.css";
 import "../uready.css";
+import "../snap-to-pay/snap.css";
+import "../snap-to-pay/scan-page.css";
+import "../ubot/ubot.css";
 
 export const metadata: Metadata = {
   title: "Dashboard | U-Topia",

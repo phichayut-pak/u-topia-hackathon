@@ -1,0 +1,12 @@
+{
+  "target": "https://u.bot/",
+  "captured": "2026-10-16",
+  "archive": "docs/rea/ubot/evidence.json.gz",
+  "archive_sha256": "4179e8b7c4a0cfbb908d3118c2df0978a2f22f44eeb75100a4e5e7ea688db59b",
+  "analysis_evidence_id": "ev_5f9075f567cd0747ce46234c10310a574f0eb3485aa0f4d9a24ac715ab89bde4",
+  "page_evidence_id": "ev_5a48362f4603bd6edff2b5ad9cb39a5a81f01ccad81595712999749327d652d8",
+  "screenshot_evidence_id": "ev_1d3c33df13dca98e1fc6a66bfccb930cbebff4967dbd5165c266b4383c9d6866",
+  "screenshot_path": "docs/rea/ubot/reference.png",
+  "screenshot_sha256": "f1e75413cfc2fb22286e13d48b81f46e3f0fac71c80692459ddd42e6c12dbd81",
+  "scope": "Public unauthenticated page and its captured shipped JavaScript; signed-in behavior and backend capabilities are unverified."
+}
