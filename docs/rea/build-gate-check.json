@@ -1,0 +1,6 @@
+{
+  "case": "Retained REA analysis reports one parse failure",
+  "expected_exit_code": 1,
+  "actual_exit_code": 1,
+  "output": "HARD FAIL \u2014 REA analysis prerequisite: REA did not successfully parse the selected shipped dashboard"
+}

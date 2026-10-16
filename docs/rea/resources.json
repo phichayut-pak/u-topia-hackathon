@@ -1,0 +1,314 @@
+{
+  "sources": {
+    "scripts": [
+      "https://app.u-topia.com/_next/static/chunks/00k2srrltu2c6.js",
+      "https://app.u-topia.com/_next/static/chunks/367xbj6_12vhd.js",
+      "https://app.u-topia.com/_next/static/chunks/2niun102n800c.js",
+      "https://app.u-topia.com/_next/static/chunks/3nc6x0_y5iwnk.js",
+      "https://app.u-topia.com/_next/static/chunks/turbopack-2o8gpypl484cy.js",
+      "https://app.u-topia.com/_next/static/chunks/3o-jqiclk4r8t.js",
+      "https://app.u-topia.com/_next/static/chunks/2qm8ivilrraol.js",
+      "https://app.u-topia.com/_next/static/chunks/38euzjj0natk5.js",
+      "https://app.u-topia.com/_next/static/chunks/31ae6veqecaxi.js",
+      "https://app.u-topia.com/_next/static/chunks/2l2ulvj2kvvyr.js",
+      "https://app.u-topia.com/_next/static/chunks/05zbhn0slwo_0.js",
+      "https://app.u-topia.com/_next/static/chunks/392nppsc0kljc.js",
+      "https://app.u-topia.com/_next/static/chunks/1ntn7efqc-iiw.js",
+      "https://app.u-topia.com/_next/static/chunks/342q3bf3a-ujm.js",
+      "https://app.u-topia.com/_next/static/chunks/3tqy0pjpzva_7.js",
+      "https://app.u-topia.com/_next/static/chunks/1h0-t840dy4dt.js",
+      "https://app.u-topia.com/_next/static/chunks/2vibevbt-4iki.js",
+      "https://app.u-topia.com/_next/static/chunks/0ghxtx2mm896d.js",
+      "https://app.u-topia.com/_next/static/chunks/1hgiw4v7jz6sl.js",
+      "https://app.u-topia.com/_next/static/chunks/3pj4qy7tdavv-.js",
+      "https://app.u-topia.com/_next/static/chunks/3j3fivzz0l0qr.js",
+      "https://app.u-topia.com/_next/static/chunks/1tw7646rjr0es.js",
+      "https://app.u-topia.com/_next/static/chunks/10r4qf8gteh_p.js",
+      "https://app.u-topia.com/_next/static/chunks/3hq3-089hxjd5.js",
+      "https://app.u-topia.com/_next/static/chunks/42m2dwyyo-3vd.js",
+      "https://app.u-topia.com/_next/static/chunks/0cz1d0mv5g_q7.js",
+      "https://app.u-topia.com/_next/static/chunks/1zpnovisl00a1.js",
+      "https://app.u-topia.com/_next/static/chunks/3p0yej8-s-p_d.js",
+      "https://app.u-topia.com/_next/static/chunks/0blgmceeewyv5.js",
+      "https://app.u-topia.com/_next/static/chunks/1qdz9_p7f1wf-.js",
+      "https://app.u-topia.com/_next/static/chunks/3ctgm4s5iiadl.js",
+      "https://app.u-topia.com/_next/static/chunks/0b-5q0q-2lxen.js",
+      "https://app.u-topia.com/_next/static/chunks/37v5ulr6qjozi.js"
+    ],
+    "css": [
+      "https://app.u-topia.com/_next/static/chunks/3d-1vk5hzu5rq.css",
+      "https://app.u-topia.com/_next/static/chunks/24ptmgorzll45.css",
+      "https://api.fontshare.com/v2/css?f[]=satoshi@1,2&display=swap",
+      "https://accounts.google.com/gsi/style"
+    ],
+    "images": [
+      {
+        "src": "https://app.u-topia.com/_next/image?url=%2Flogo.png&w=48&q=75",
+        "alt": "U-Topia",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "files": [
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/00k2srrltu2c6.js",
+      "name": "00k2srrltu2c6.js",
+      "bytes": 31463,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/367xbj6_12vhd.js",
+      "name": "367xbj6_12vhd.js",
+      "bytes": 227426,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/2niun102n800c.js",
+      "name": "2niun102n800c.js",
+      "bytes": 137848,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/3nc6x0_y5iwnk.js",
+      "name": "3nc6x0_y5iwnk.js",
+      "bytes": 44491,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/turbopack-2o8gpypl484cy.js",
+      "name": "turbopack-2o8gpypl484cy.js",
+      "bytes": 10614,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/3o-jqiclk4r8t.js",
+      "name": "3o-jqiclk4r8t.js",
+      "bytes": 29045,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/2qm8ivilrraol.js",
+      "name": "2qm8ivilrraol.js",
+      "bytes": 36896,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/38euzjj0natk5.js",
+      "name": "38euzjj0natk5.js",
+      "bytes": 29393,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/31ae6veqecaxi.js",
+      "name": "31ae6veqecaxi.js",
+      "bytes": 31462,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/2l2ulvj2kvvyr.js",
+      "name": "2l2ulvj2kvvyr.js",
+      "bytes": 29577,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/05zbhn0slwo_0.js",
+      "name": "05zbhn0slwo_0.js",
+      "bytes": 36805,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/392nppsc0kljc.js",
+      "name": "392nppsc0kljc.js",
+      "bytes": 1618585,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/1ntn7efqc-iiw.js",
+      "name": "1ntn7efqc-iiw.js",
+      "bytes": 54763,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/342q3bf3a-ujm.js",
+      "name": "342q3bf3a-ujm.js",
+      "bytes": 35491,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/3tqy0pjpzva_7.js",
+      "name": "3tqy0pjpzva_7.js",
+      "bytes": 73277,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/1h0-t840dy4dt.js",
+      "name": "1h0-t840dy4dt.js",
+      "bytes": 32307,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/2vibevbt-4iki.js",
+      "name": "2vibevbt-4iki.js",
+      "bytes": 117095,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/0ghxtx2mm896d.js",
+      "name": "0ghxtx2mm896d.js",
+      "bytes": 23501,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/1hgiw4v7jz6sl.js",
+      "name": "1hgiw4v7jz6sl.js",
+      "bytes": 56171,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/3pj4qy7tdavv-.js",
+      "name": "3pj4qy7tdavv-.js",
+      "bytes": 1257,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/3j3fivzz0l0qr.js",
+      "name": "3j3fivzz0l0qr.js",
+      "bytes": 5085,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/1tw7646rjr0es.js",
+      "name": "1tw7646rjr0es.js",
+      "bytes": 28114,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/10r4qf8gteh_p.js",
+      "name": "10r4qf8gteh_p.js",
+      "bytes": 42554,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/3hq3-089hxjd5.js",
+      "name": "3hq3-089hxjd5.js",
+      "bytes": 34722,
+      "dashboard": true,
+      "spending": true
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/42m2dwyyo-3vd.js",
+      "name": "42m2dwyyo-3vd.js",
+      "bytes": 1423,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/0cz1d0mv5g_q7.js",
+      "name": "0cz1d0mv5g_q7.js",
+      "bytes": 112594,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/1zpnovisl00a1.js",
+      "name": "1zpnovisl00a1.js",
+      "bytes": 5804,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/3p0yej8-s-p_d.js",
+      "name": "3p0yej8-s-p_d.js",
+      "bytes": 3772,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/0blgmceeewyv5.js",
+      "name": "0blgmceeewyv5.js",
+      "bytes": 1244,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/1qdz9_p7f1wf-.js",
+      "name": "1qdz9_p7f1wf-.js",
+      "bytes": 19234,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/3ctgm4s5iiadl.js",
+      "name": "3ctgm4s5iiadl.js",
+      "bytes": 12122,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/0b-5q0q-2lxen.js",
+      "name": "0b-5q0q-2lxen.js",
+      "bytes": 27698,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/37v5ulr6qjozi.js",
+      "name": "37v5ulr6qjozi.js",
+      "bytes": 5598,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/3d-1vk5hzu5rq.css",
+      "name": "3d-1vk5hzu5rq.css",
+      "bytes": 3713,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://app.u-topia.com/_next/static/chunks/24ptmgorzll45.css",
+      "name": "24ptmgorzll45.css",
+      "bytes": 141474,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://api.fontshare.com/v2/css?f[]=satoshi@1,2&display=swap",
+      "name": "css",
+      "bytes": 1186,
+      "dashboard": false,
+      "spending": false
+    },
+    {
+      "url": "https://accounts.google.com/gsi/style",
+      "name": "style",
+      "bytes": 696,
+      "dashboard": false,
+      "spending": false
+    }
+  ]
+}

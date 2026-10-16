@@ -1,0 +1,35 @@
+{
+  "target": "https://app.u-topia.com/dashboard",
+  "captured_at": "2026-10-16",
+  "analysis_evidence_id": "ev_6eefad4ac63d994d6647ff56840baf733a303d59ce9ad1878c0865b86501f841",
+  "source_sha256": "f3229a9e4cb4e0caa3d79ebbe2a51d243c87758de2680c9608fc3165d4c8b223",
+  "source_path": "docs/rea/shipped-dashboard.js",
+  "statistics": {
+    "findings": 0,
+    "invalid_utf8_files": 0,
+    "modules": 0,
+    "nested_asar_containers": 0,
+    "parse_failures": 0,
+    "parsed_javascript_files": 1,
+    "relevant_files": 33,
+    "text_bytes_read": 34722,
+    "visited_ast_nodes": 9105
+  },
+  "source_selection": {
+    "requested_paths": [
+      "3hq3-089hxjd5.js"
+    ],
+    "unselected_files": 32
+  },
+  "runtime_evidence_ids": [
+    "ev_0297df0acd4b8dbef5fb4ebef0e8be40771d744ac158885d110975004bdb988f",
+    "ev_1c8de86b825fd3e236726f5401c910f9cd73d7ae3ec76be6635a4d9312390339",
+    "ev_36791ba4e6261b6c9a623792c0f905e961ab1900b82b82ecb301e2af724bde89",
+    "ev_7cf9b22b94047e0c2c0c23eacabf73dda47a2c2528f37bc7706585611893bd0c",
+    "ev_ff3457f4a173397bb836d14c0dd5ae1858d1b743a3ca15b8b70114999dabfd6c"
+  ],
+  "archives": {
+    "static-evidence.json.gz": "97ea0b43cc60a7bac83b69604401f86e5d16f12ec3cf341b76503b2b38e487b8",
+    "runtime-evidence.json.gz": "8f867cc1301d69983c0e1616c202104fda9fde37549dba7dcbd41a931d22cdc0"
+  }
+}

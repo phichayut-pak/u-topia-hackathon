@@ -1,0 +1,3 @@
+interface:
+  display_name: "UI Reverse Engineering"
+  short_description: "Inspect and match reference web/Electron interfaces"

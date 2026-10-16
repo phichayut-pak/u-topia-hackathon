@@ -1,0 +1,161 @@
+{
+  "captured_at": "2026-10-16",
+  "method": "Playwright viewport screenshots at verified CSS viewport dimensions, compared by REA compare_web_screenshots with channel_threshold 0.",
+  "desktop": {
+    "evidence_id": "ev_a343a6887c433aa578558a8c332f3385d9648ec4ae6e479080fec6dc55b88252",
+    "subject": null,
+    "provider": {
+      "id": "rea-cdp-browser",
+      "name": "REA Chrome DevTools Protocol observation provider",
+      "version": "2"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.web-screenshot-diff",
+    "operation": "compare_web_screenshots",
+    "parameters": {
+      "before_artifact_sha256": "9dadf7f3c48a9b5ffd190bd18e67a52abbed6c07bad7b1c7ca8a761ef1c2f148",
+      "after_artifact_sha256": "ac1d523f55f44b65e68c9431fb86b743951514c045cef84132963ff23d9942ef",
+      "channel_threshold": 0
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "before": {
+        "width": 1440,
+        "height": 1000
+      },
+      "after": {
+        "width": 1440,
+        "height": 1000
+      },
+      "channel_threshold": 0,
+      "limitations": [
+        "Pixel comparison does not perform OCR, semantic layout analysis, or perceptual color correction.",
+        "Only non-interlaced 8-bit RGB and RGBA PNG screenshots are accepted.",
+        "PNG tRNS transparency is accepted only as a six-byte RGB color key; tRNS on RGBA or with another length is rejected."
+      ],
+      "status": "different",
+      "compared_pixels": 1440000,
+      "changed_pixels": 1,
+      "changed_ratio": 6.944444444444445e-7,
+      "maximum_channel_delta": 4,
+      "mean_absolute_channel_delta": 0.0000015625
+    },
+    "confidence": "observed",
+    "authority": "external-service",
+    "environment": null,
+    "limitations": [
+      "Artifact identity is unavailable for this observation.",
+      "Pixel comparison does not perform OCR, semantic layout analysis, or perceptual color correction.",
+      "Only non-interlaced 8-bit RGB and RGBA PNG screenshots are accepted.",
+      "PNG tRNS transparency is accepted only as a six-byte RGB color key; tRNS on RGBA or with another length is rejected."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "mobile": {
+    "evidence_id": "ev_fd155ab887a2849bcb00ba45b7de943b5af3b0433c4e038daf31556052ccc14b",
+    "subject": null,
+    "provider": {
+      "id": "rea-cdp-browser",
+      "name": "REA Chrome DevTools Protocol observation provider",
+      "version": "2"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.web-screenshot-diff",
+    "operation": "compare_web_screenshots",
+    "parameters": {
+      "before_artifact_sha256": "767393de6fad83ff7fea7692be60343736f9a0abf8afff69d9c29ab54049c319",
+      "after_artifact_sha256": "0fa42a37dd6dc9db1b45807207d1438eba1d57231cc476baedc7a5f8f7a490ae",
+      "channel_threshold": 0
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "before": {
+        "width": 390,
+        "height": 844
+      },
+      "after": {
+        "width": 390,
+        "height": 844
+      },
+      "channel_threshold": 0,
+      "limitations": [
+        "Pixel comparison does not perform OCR, semantic layout analysis, or perceptual color correction.",
+        "Only non-interlaced 8-bit RGB and RGBA PNG screenshots are accepted.",
+        "PNG tRNS transparency is accepted only as a six-byte RGB color key; tRNS on RGBA or with another length is rejected."
+      ],
+      "status": "different",
+      "compared_pixels": 329160,
+      "changed_pixels": 485,
+      "changed_ratio": 0.0014734475634949568,
+      "maximum_channel_delta": 3,
+      "mean_absolute_channel_delta": 0.0012904058816381092
+    },
+    "confidence": "observed",
+    "authority": "external-service",
+    "environment": null,
+    "limitations": [
+      "Artifact identity is unavailable for this observation.",
+      "Pixel comparison does not perform OCR, semantic layout analysis, or perceptual color correction.",
+      "Only non-interlaced 8-bit RGB and RGBA PNG screenshots are accepted.",
+      "PNG tRNS transparency is accepted only as a six-byte RGB color key; tRNS on RGBA or with another length is rejected."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "supplemental_native_capture_comparison": {
+    "evidence_id": "ev_6566231c1169130bb7a9b9f97d82723a2e50d456e9396e480c1f1bd66869abc1",
+    "subject": null,
+    "provider": {
+      "id": "rea-cdp-browser",
+      "name": "REA Chrome DevTools Protocol observation provider",
+      "version": "2"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.web-screenshot-diff",
+    "operation": "compare_web_screenshots",
+    "parameters": {
+      "before_artifact_sha256": "75b3a4d51387a553c8c71a1465fe6a3ce75ec3aa02301c191acf8daf25696e02",
+      "after_artifact_sha256": "75b3a4d51387a553c8c71a1465fe6a3ce75ec3aa02301c191acf8daf25696e02",
+      "channel_threshold": 0
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "before": {
+        "width": 2880,
+        "height": 2000
+      },
+      "after": {
+        "width": 2880,
+        "height": 2000
+      },
+      "channel_threshold": 0,
+      "limitations": [
+        "Pixel comparison does not perform OCR, semantic layout analysis, or perceptual color correction.",
+        "Only non-interlaced 8-bit RGB and RGBA PNG screenshots are accepted.",
+        "PNG tRNS transparency is accepted only as a six-byte RGB color key; tRNS on RGBA or with another length is rejected."
+      ],
+      "status": "identical",
+      "compared_pixels": 5760000,
+      "changed_pixels": 0,
+      "changed_ratio": 0,
+      "maximum_channel_delta": 0,
+      "mean_absolute_channel_delta": 0
+    },
+    "confidence": "observed",
+    "authority": "external-service",
+    "environment": null,
+    "limitations": [
+      "Artifact identity is unavailable for this observation.",
+      "Pixel comparison does not perform OCR, semantic layout analysis, or perceptual color correction.",
+      "Only non-interlaced 8-bit RGB and RGBA PNG screenshots are accepted.",
+      "PNG tRNS transparency is accepted only as a six-byte RGB color key; tRNS on RGBA or with another length is rejected."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "note": "Direct viewport screenshots are used for final dimensions because the native connected capture may reflect restored window metrics. Exact changes are retained; native zero-difference captures do not establish universal equality."
+}

@@ -1,0 +1,263 @@
+{
+  "report": [
+    {
+      "name": "desktop",
+      "reference": {
+        "url": "https://app.u-topia.com/dashboard",
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "font": "\"Satoshi Variable\", Satoshi, Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+        "headers": [
+          {
+            "text": "Welcome!",
+            "x": 208,
+            "y": 151,
+            "width": 1024,
+            "height": 36
+          },
+          {
+            "text": "Spending Breakdown",
+            "x": 208,
+            "y": 558,
+            "width": 1024,
+            "height": 32
+          },
+          {
+            "text": "Recent Transactions",
+            "x": 208,
+            "y": 978.8984375,
+            "width": 212.375,
+            "height": 32
+          }
+        ],
+        "sections": [
+          {
+            "x": 208,
+            "y": 235,
+            "width": 1024,
+            "height": 217
+          },
+          {
+            "x": 208,
+            "y": 476,
+            "width": 1024,
+            "height": 58
+          },
+          {
+            "x": 208,
+            "y": 558,
+            "width": 1024,
+            "height": 396.8984375
+          },
+          {
+            "x": 208,
+            "y": 978.8984375,
+            "width": 1024,
+            "height": 190
+          }
+        ]
+      },
+      "local": {
+        "url": "http://127.0.0.1:5173/dashboard",
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "font": "Satoshi, Arial, Helvetica, sans-serif",
+        "headers": [
+          {
+            "text": "Welcome!",
+            "x": 208,
+            "y": 151,
+            "width": 1024,
+            "height": 36
+          },
+          {
+            "text": "Total Balance",
+            "x": 237,
+            "y": 264,
+            "width": 140.9375,
+            "height": 32
+          },
+          {
+            "text": "Spending Breakdown",
+            "x": 208,
+            "y": 558,
+            "width": 1024,
+            "height": 32
+          },
+          {
+            "text": "Recent Transactions",
+            "x": 208,
+            "y": 978.8984375,
+            "width": 212.375,
+            "height": 32
+          },
+          {
+            "text": "Logout",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        ],
+        "sections": [
+          {
+            "x": 208,
+            "y": 235,
+            "width": 1024,
+            "height": 217
+          },
+          {
+            "x": 208,
+            "y": 476,
+            "width": 1024,
+            "height": 58
+          },
+          {
+            "x": 208,
+            "y": 558,
+            "width": 1024,
+            "height": 396.8984375
+          },
+          {
+            "x": 208,
+            "y": 978.8984375,
+            "width": 1024,
+            "height": 190
+          }
+        ]
+      }
+    },
+    {
+      "name": "mobile",
+      "reference": {
+        "url": "https://app.u-topia.com/dashboard",
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "font": "\"Satoshi Variable\", Satoshi, Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+        "headers": [
+          {
+            "text": "Welcome!",
+            "x": 16,
+            "y": 137,
+            "width": 358,
+            "height": 30
+          },
+          {
+            "text": "Spending Breakdown",
+            "x": 16,
+            "y": 496,
+            "width": 358,
+            "height": 32
+          },
+          {
+            "text": "Recent Transactions",
+            "x": 16,
+            "y": 882.5,
+            "width": 212.375,
+            "height": 32
+          }
+        ],
+        "sections": [
+          {
+            "x": 16,
+            "y": 209,
+            "width": 358,
+            "height": 197
+          },
+          {
+            "x": 16,
+            "y": 426,
+            "width": 358,
+            "height": 50
+          },
+          {
+            "x": 16,
+            "y": 496,
+            "width": 358,
+            "height": 366.5
+          },
+          {
+            "x": 16,
+            "y": 882.5,
+            "width": 358,
+            "height": 166
+          }
+        ]
+      },
+      "local": {
+        "url": "http://127.0.0.1:5173/dashboard",
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "font": "Satoshi, Arial, Helvetica, sans-serif",
+        "headers": [
+          {
+            "text": "Welcome!",
+            "x": 16,
+            "y": 137,
+            "width": 358,
+            "height": 30
+          },
+          {
+            "text": "Total Balance",
+            "x": 37,
+            "y": 230,
+            "width": 140.9375,
+            "height": 32
+          },
+          {
+            "text": "Spending Breakdown",
+            "x": 16,
+            "y": 496,
+            "width": 358,
+            "height": 32
+          },
+          {
+            "text": "Recent Transactions",
+            "x": 16,
+            "y": 882.5,
+            "width": 212.375,
+            "height": 32
+          },
+          {
+            "text": "Logout",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        ],
+        "sections": [
+          {
+            "x": 16,
+            "y": 209,
+            "width": 358,
+            "height": 197
+          },
+          {
+            "x": 16,
+            "y": 426,
+            "width": 358,
+            "height": 50
+          },
+          {
+            "x": 16,
+            "y": 496,
+            "width": 358,
+            "height": 366.5
+          },
+          {
+            "x": 16,
+            "y": 882.5,
+            "width": 358,
+            "height": 166
+          }
+        ]
+      }
+    }
+  ],
+  "errors": []
+}
