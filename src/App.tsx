@@ -4,7 +4,6 @@ import { Dashboard } from './Dashboard';
 import { SecondaryPages } from './SecondaryPages';
 import { ReceiveModal } from './ReceiveModal';
 import { WorkspaceIconButton } from './components/WorkspaceIconButton';
-import './secondary.css';
 
 const navItems = [
   { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },

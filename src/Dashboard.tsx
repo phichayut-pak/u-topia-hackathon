@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
-import { ArrowDownRight, ArrowUpRight, Eye, EyeOff, RefreshCw } from 'lucide-react';
+import { ArrowDownRight, ArrowUpRight, Eye, EyeOff, RefreshCw, ScanLine } from 'lucide-react';
+import { baht, CoinIcon, coinAmt, useUReady, type Activity } from './uready/client';
 import { WorkspaceIconButton } from './components/WorkspaceIconButton';
 
 type Props = { navigate: (path: string) => void; onReceive: () => void };
@@ -59,15 +60,28 @@ function SpendingChart({ period }: { period: Period }) {
   </div>;
 }
 
+export function RecentPayments({ items, limit }: { items: Activity[]; limit?: number }) {
+  const list = limit ? items.slice(0, limit) : items;
+  return <div className="ur-list">{list.map(a => <div className="ur-row" key={a.id}>
+    <CoinIcon s={a.coin_symbol} />
+    <div className="mid"><strong>{a.payee_name}</strong><small>{new Date(a.created_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })} · Thai QR · {a.status}</small></div>
+    <div className="right"><strong>−{baht(a.amount_thb)}</strong><small>−{coinAmt(a.coin_amount, a.coin_symbol)} {a.coin_symbol}</small></div>
+  </div>)}</div>;
+}
+
 export function Dashboard({ navigate, onReceive }: Props) {
+  const { state, refresh: reload } = useUReady();
   const [visible, toggleVisible] = useBalanceVisibility();
   const [period, setPeriod] = useState<Period>('30d');
   const [refreshing, setRefreshing] = useState<string | null>(null);
   const [announcement, setAnnouncement] = useState('');
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const amount = visible ? '$0.00' : '••••••';
+  const hide = (text: string) => (visible ? text : '••••••');
+  const cryptoThb = state?.portfolio.totalThb ?? 0;
+  const spendingLeft = state ? Math.max(0, state.user.budget - state.month.used) : 0;
+  const amount = hide(baht(cryptoThb + spendingLeft));
   function refresh(section: string) {
-    clearTimeout(timer.current); setRefreshing(section); setAnnouncement('');
+    clearTimeout(timer.current); setRefreshing(section); setAnnouncement(''); reload();
     timer.current = setTimeout(() => { setRefreshing(null); setAnnouncement(`${section === 'balance' ? 'Balance' : 'Transactions'} updated.`); }, 650);
   }
   function changePeriod(next: Period) { setPeriod(next); }
@@ -89,9 +103,10 @@ export function Dashboard({ navigate, onReceive }: Props) {
         <WorkspaceIconButton label={visible ? 'Hide balance' : 'Show balance'} className="quiet" onClick={toggleVisible}>{visible ? <Eye /> : <EyeOff />}</WorkspaceIconButton>
       </div></div>
       <p className="total-amount" aria-live="polite">{amount}</p>
-      <div className="wallet-balances"><div><p>Crypto Wallet</p><p>{amount}</p></div><div><p>Spending Wallet</p><p>{amount}</p></div></div>
+      <div className="wallet-balances"><div><p>Crypto Wallet</p><p>{hide(baht(cryptoThb))}</p></div><div><p>Spending Wallet</p><p>{hide(baht(spendingLeft))}</p></div></div>
     </section>
     <section className="quick-actions" aria-label="Wallet actions">
+      <button className="ur-scan-cta" onClick={() => navigate('/dashboard/pay/qr')}><ScanLine />Scan to Pay (Thai QR)</button>
       <button onClick={onReceive}><ArrowDownRight />Receive</button>
       <button onClick={() => navigate('/dashboard/swap')}><span className="swap-icon" aria-hidden="true" />Swap</button>
       <button onClick={() => navigate('/dashboard/pay')}><ArrowUpRight />Send</button>
@@ -102,13 +117,13 @@ export function Dashboard({ navigate, onReceive }: Props) {
         <div className="spending-heading"><p>{titles[period]}</p><div className="period-tabs" role="tablist" aria-label="Spending period">
           {periods.map((item, index) => <button key={item} role="tab" aria-selected={item === period} tabIndex={item === period ? 0 : -1} onClick={() => changePeriod(item)} onKeyDown={event => tabKey(event, index)} className={item === period ? 'selected' : ''}>{item}</button>)}
         </div></div>
-        <p className="spending-amount" aria-live="polite">$0.00</p>
+        <p className="spending-amount" aria-live="polite">{baht(state?.month.used ?? 0)}</p>
         <SpendingChart period={period} />
       </div>
     </section>
     <section className="transactions-section" aria-labelledby="transactions-heading">
       <div className="transactions-heading"><div><h2 id="transactions-heading">Recent Transactions</h2><WorkspaceIconButton label="Refresh transactions" onClick={() => refresh('transactions')} disabled={refreshing === 'transactions'} className={`quiet ${refreshing === 'transactions' ? 'refreshing' : ''}`}><RefreshCw /></WorkspaceIconButton></div><a href="/dashboard/transactions" onClick={event => { event.preventDefault(); navigate('/dashboard/transactions'); }}>All<span aria-hidden="true">›</span></a></div>
-      <EmptyTransactions />
+      {state?.activity.length ? <RecentPayments items={state.activity} limit={5} /> : <EmptyTransactions />}
     </section>
     <p className="sr-only" role="status">{announcement}</p>
   </div>;

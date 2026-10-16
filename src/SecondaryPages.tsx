@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ArrowDownRight, ArrowLeft, ArrowLeftRight, ArrowUpRight, AtSign, Bell, Camera, ChevronDown, ChevronRight, CircleHelp, CircleUserRound, Eye, EyeOff, Fingerprint, Info, Lock, LogOut, RefreshCw, ScanLine, Search, Send, ShieldCheck, Sparkles, Users, Wallet, WalletCards, X } from 'lucide-react'
 import { WorkspaceIconButton } from './components/WorkspaceIconButton'
-import './secondary.css'
+import { baht, useUReady } from './uready/client'
+import { PayQR } from './uready/PayQR'
+import { Holdings, SpendingPanel } from './uready/WalletExtras'
+import { RecentPayments } from './Dashboard'
 
 type Props = { path: string; navigate: (path: string) => void; onReceive: () => void }
 type Navigate = Props['navigate']
@@ -43,14 +46,17 @@ function Wallets({ navigate, onReceive }: Pick<Props, 'navigate' | 'onReceive'>)
   const [visible, setVisible] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
   const crypto = tab === 'Crypto Wallet'
-  function refresh() { setRefreshing(true); window.setTimeout(() => setRefreshing(false), 650) }
+  const { state, refresh: reload } = useUReady()
+  function refresh() { setRefreshing(true); reload(); window.setTimeout(() => setRefreshing(false), 650) }
+  const balance = crypto ? state?.portfolio.totalThb ?? 0 : state ? Math.max(0, state.user.budget - state.month.used) : 0
   return <div className="secondary-page wallets-page">
     <h1>Your Wallets</h1>
     <div className="wallet-segments"><Segments labels={['Crypto Wallet', 'Spending Wallet']} selected={tab} onSelect={setTab} /></div>
-    <section className="wallet-balance"><div><h2>{crypto ? 'Crypto Balance' : 'Spending Balance'}</h2><div className="balance-actions"><button aria-label="Refresh total balance" onClick={refresh}><RefreshCw size={16} className={refreshing ? 'secondary-spin' : ''} /></button><button aria-label={visible ? 'Hide balance' : 'Show balance'} onClick={() => setVisible(!visible)}>{visible ? <Eye size={16} /> : <EyeOff size={16} />}</button></div></div><p>{visible ? '$0.00' : '••••••'}</p></section>
-    <section className="wallet-actions"><button onClick={onReceive}><ArrowDownRight />Receive</button><button onClick={() => navigate('/dashboard/pay')}><Send />Pay</button><button onClick={() => navigate('/dashboard/swap')}><ArrowLeftRight />Swap</button><button onClick={onReceive}><ArrowUpRight />Top Up</button></section>
-    {crypto && <section><h2>Holdings</h2><Empty icon={<Wallet size={20} />} title="No holdings yet" subtitle="Your crypto assets will appear here" /></section>}
-    <section><div className="secondary-section-heading"><h2>Recent {crypto ? 'Crypto' : 'Spending'} Transactions</h2><button className="inline-refresh" aria-label="Refresh transactions" onClick={refresh}><RefreshCw size={16} className={refreshing ? 'secondary-spin' : ''} /></button><button className="all-link" onClick={() => navigate(`/dashboard/transactions?tab=${crypto ? 'crypto' : 'cards'}`)}>All ›</button></div><Empty title="No activity yet." subtitle="Start by making your first transaction!" /></section>
+    <section className="wallet-balance"><div><h2>{crypto ? 'Crypto Balance' : 'Spending Balance'}</h2><div className="balance-actions"><button aria-label="Refresh total balance" onClick={refresh}><RefreshCw size={16} className={refreshing ? 'secondary-spin' : ''} /></button><button aria-label={visible ? 'Hide balance' : 'Show balance'} onClick={() => setVisible(!visible)}>{visible ? <Eye size={16} /> : <EyeOff size={16} />}</button></div></div><p>{visible ? baht(balance) : '••••••'}</p></section>
+    <section className="wallet-actions"><button onClick={onReceive}><ArrowDownRight />Receive</button><button onClick={() => navigate('/dashboard/pay/qr')}><ScanLine />Scan</button><button onClick={() => navigate('/dashboard/swap')}><ArrowLeftRight />Swap</button><button onClick={onReceive}><ArrowUpRight />Top Up</button></section>
+    {crypto && <section><h2>Holdings</h2>{state?.portfolio.holdings.length ? <Holdings state={state} /> : <Empty icon={<Wallet size={20} />} title="No holdings yet" subtitle="Your crypto assets will appear here" />}</section>}
+    {!crypto && <SpendingPanel state={state} refresh={reload} />}
+    <section><div className="secondary-section-heading"><h2>Recent {crypto ? 'Crypto' : 'Spending'} Transactions</h2><button className="inline-refresh" aria-label="Refresh transactions" onClick={refresh}><RefreshCw size={16} className={refreshing ? 'secondary-spin' : ''} /></button><button className="all-link" onClick={() => navigate(`/dashboard/transactions?tab=${crypto ? 'crypto' : 'cards'}`)}>All ›</button></div>{state?.activity.length ? <RecentPayments items={state.activity} limit={5} /> : <Empty title="No activity yet." subtitle="Start by making your first transaction!" />}</section>
   </div>
 }
 
@@ -78,7 +84,7 @@ function Swap({ navigate }: { navigate: Navigate }) {
 }
 
 function Pay({ navigate }: { navigate: Navigate }) {
-  return <div className="secondary-page pay-page"><PageHeader title="Pay" subtitle="Choose how you want to send" navigate={navigate} /><div className="pay-options">{[{ title: 'Send to U-tag', subtitle: 'Send to any U-tag user', icon: AtSign, route: 'u-tag' }, { title: 'Send crypto', subtitle: 'Send crypto on chain', icon: Send, route: 'crypto' }].map(({ title, subtitle, icon: Icon, route }) => <button key={route} onClick={() => navigate(`/dashboard/pay/${route}`)}><span className="pay-option-icon"><Icon size={20} /></span><span><strong>{title}</strong><small>{subtitle}</small></span><ChevronRight size={20} className="muted" /></button>)}</div></div>
+  return <div className="secondary-page pay-page"><PageHeader title="Pay" subtitle="Choose how you want to send" navigate={navigate} /><div className="pay-options">{[{ title: 'Scan Thai QR', subtitle: 'Pay any PromptPay QR from your crypto', icon: ScanLine, route: 'qr' }, { title: 'Send to U-tag', subtitle: 'Send to any U-tag user', icon: AtSign, route: 'u-tag' }, { title: 'Send crypto', subtitle: 'Send crypto on chain', icon: Send, route: 'crypto' }].map(({ title, subtitle, icon: Icon, route }) => <button key={route} onClick={() => navigate(`/dashboard/pay/${route}`)}><span className="pay-option-icon"><Icon size={20} /></span><span><strong>{title}</strong><small>{subtitle}</small></span><ChevronRight size={20} className="muted" /></button>)}</div></div>
 }
 
 function SendUTag({ navigate }: { navigate: Navigate }) {
@@ -117,9 +123,10 @@ function Notifications({ navigate }: { navigate: Navigate }) {
 }
 
 function Transactions({ navigate, path }: { navigate: Navigate; path: string }) {
+  const { state } = useUReady()
   const initial = new URLSearchParams(path.split('?')[1] || '').get('tab')
   const [tab, setTab] = useState(initial === 'crypto' ? 'Crypto' : initial === 'cards' ? 'Cards' : 'All')
-  return <div className="secondary-page record-page transactions-page"><PageHeader title="Transactions" small back="/dashboard" navigate={navigate} /><Segments labels={['All', 'Crypto', 'Cards']} selected={tab} onSelect={setTab} /><div className="transaction-empty"><strong>No activity yet.</strong><p>Your transactions will appear here.</p></div></div>
+  return <div className="secondary-page record-page transactions-page"><PageHeader title="Transactions" small back="/dashboard" navigate={navigate} /><Segments labels={['All', 'Crypto', 'Cards']} selected={tab} onSelect={setTab} />{tab !== 'Cards' && state?.activity.length ? <RecentPayments items={state.activity} /> : <div className="transaction-empty"><strong>No activity yet.</strong><p>Your transactions will appear here.</p></div>}</div>
 }
 
 function Profile({ navigate }: { navigate: Navigate }) {
@@ -145,6 +152,7 @@ export function SecondaryPages({ path, navigate, onReceive }: Props) {
   if (route === '/dashboard/swap') return <Swap navigate={navigate} />
   if (route === '/dashboard/pay/u-tag') return <SendUTag navigate={navigate} />
   if (route === '/dashboard/pay/crypto') return <SendCrypto navigate={navigate} />
+  if (route === '/dashboard/pay/qr') return <PayQR navigate={navigate} />
   if (route === '/dashboard/pay') return <Pay navigate={navigate} />
   if (route === '/dashboard/card' || route === '/dashboard/cards') return <Cards />
   if (route === '/dashboard/profile') return <Profile navigate={navigate} />

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { AtSign, Check, ChevronDown, Copy, Download, Info, QrCode, Share2, X } from 'lucide-react';
 import { WorkspaceIconButton } from './components/WorkspaceIconButton';
-import './receive.css';
 
 const address = '0x1F0a33d4B8860E43Bf4cd1B33F59E9bfc51c9Aa7';
 const networks = ['BNB Smart Chain', 'Ethereum', 'Base', 'Polygon'];
